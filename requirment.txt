@@ -1,0 +1,6 @@
+django==1.7c3
+django-bootstrap-static==3.1.1
+djangorestframework==2.3.14
+djangorestframework-gis==0.3
+django-filter==0.7
+psycopg2==2.5.3

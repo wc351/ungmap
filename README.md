@@ -1,0 +1,1 @@
+This is a project for creating a UNG Campus map for the Gainesville campus.
