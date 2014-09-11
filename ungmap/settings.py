@@ -37,6 +37,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'bootstrap',
+    'analytical',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -64,6 +67,18 @@ DATABASES = {
     }
 }
 
+
+DEFAULT_FILE_STORAGE = 'UNG_Map.s3utils.MediaRootS3BotoStorage'
+STATICFILES_STORAGE = 'UNG_Map.s3utils.MediaRootS3BotoStorage'
+AWS_ACCESS_KEY_ID = ''
+AWS_SECRET_ACCESS_KEY = ''
+AWS_STORAGE_BUCKET_NAME = 'UNG_Map'
+MEDIA_ROOT = 'media/'
+STATIC_ROOT = 'static/'
+S3_URL = 'http://{}.s3.amazonaws.com/'.format(AWS_STORAGE_BUCKET_NAME)
+MEDIA_URL = S3_URL + MEDIA_ROOT
+STATIC_URL = S3_URL + STATIC_ROOT
+
 # Internationalization
 # https://docs.djangoproject.com/en/dev/topics/i18n/
 
@@ -77,11 +92,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/dev/howto/static-files/
-
-STATIC_URL = '/static/'
 
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR,  'templates'),
