@@ -37,9 +37,11 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.gis',
     'rest_framework',
     'bootstrap',
     'analytical',
+    'apps.map',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -68,11 +70,10 @@ DATABASES = {
 }
 
 
-DEFAULT_FILE_STORAGE = 'UNG_Map.s3utils.MediaRootS3BotoStorage'
-STATICFILES_STORAGE = 'UNG_Map.s3utils.MediaRootS3BotoStorage'
-AWS_ACCESS_KEY_ID = ''
-AWS_SECRET_ACCESS_KEY = ''
-AWS_STORAGE_BUCKET_NAME = 'UNG_Map'
+DEFAULT_FILE_STORAGE = 'ungmap.s3utils.MediaRootS3BotoStorage'
+STATICFILES_STORAGE = 'ungmap.s3utils.MediaRootS3BotoStorage'
+
+AWS_STORAGE_BUCKET_NAME = 'ungmap'
 MEDIA_ROOT = 'media/'
 STATIC_ROOT = 'static/'
 S3_URL = 'http://{}.s3.amazonaws.com/'.format(AWS_STORAGE_BUCKET_NAME)

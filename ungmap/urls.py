@@ -1,6 +1,8 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from apps.views import MainView
+
+from apps.map.views import MainView
+
 
 urlpatterns = patterns('',
     # Examples:
