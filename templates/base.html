@@ -1,4 +1,5 @@
 {% load analytical %}
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
 <head lang="en">
@@ -13,4 +14,11 @@
 
 {% analytical_body_top %}
 </body>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src=" {% static "bootstrap/js/bootstrap.min.js" %}"></script>
+{% block scriptspace %}
+{% endblock %}
 </html>
+
+
