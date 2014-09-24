@@ -3,15 +3,19 @@
 <!DOCTYPE html>
 <html>
 <head lang="en">
+    <link href = "{% static "bootstrap/css/bootstrap.css" %}" rel="stylesheet">
     {% analytical_head_top %}
     <meta charset="UTF-8">
-    <title></title>
+    <title>{% block title %}{% endblock %}</title>
     {% analytical_head_bottom %}
 </head>
 <body>
 {% analytical_body_top %}
 
+{% block main_css %}<link href="{% static "main_page.css" %}" rel="stylesheet"> {% endblock %}
 
+
+{% block content %}{% endblock %}
 {% analytical_body_top %}
 </body>
 

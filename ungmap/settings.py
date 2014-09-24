@@ -72,7 +72,8 @@ DATABASES = {
 
 DEFAULT_FILE_STORAGE = 'ungmap.s3utils.MediaRootS3BotoStorage'
 STATICFILES_STORAGE = 'ungmap.s3utils.MediaRootS3BotoStorage'
-
+AWS_ACCESS_KEY_ID = 'AKIAIX6AQXYGNEYVHR2Q'
+AWS_SECRET_ACCESS_KEY = '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'
 AWS_STORAGE_BUCKET_NAME = 'ungmap'
 MEDIA_ROOT = 'media/'
 STATIC_ROOT = 'static/'
