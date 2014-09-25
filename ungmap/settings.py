@@ -72,8 +72,6 @@ DATABASES = {
 
 DEFAULT_FILE_STORAGE = 'ungmap.s3utils.MediaRootS3BotoStorage'
 STATICFILES_STORAGE = 'ungmap.s3utils.MediaRootS3BotoStorage'
-AWS_ACCESS_KEY_ID = ''
-AWS_SECRET_ACCESS_KEY = ''
 AWS_STORAGE_BUCKET_NAME = 'ungmap'
 MEDIA_ROOT = 'media/'
 STATIC_ROOT = 'static/'
@@ -98,3 +96,4 @@ USE_TZ = True
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR,  'templates'),
 )
+
