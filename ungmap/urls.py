@@ -3,7 +3,7 @@ from django.contrib import admin
 
 from apps.map.views import MainView
 
-
+admin.autodiscover()
 urlpatterns = patterns('',
     # Examples:
     url(r'^$', MainView.as_view(), name='main_page'),
