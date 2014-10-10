@@ -27,9 +27,10 @@ class Campus(models.Model):
 
 class Building(models.Model):
     """Building model"""
-    build_name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50)
+    descript = models.CharField(max_length=100)
     pic = models.ForeignKey(Pics)
-    building_num = models.CharField(max_length=50)
+    num = models.CharField(max_length=50)
     campus = models.ForeignKey(Campus)
     geom = models.PolygonField()
     objects = models.GeoManager()
@@ -38,15 +39,15 @@ class Building(models.Model):
         verbose_name = 'Building'
 
     def __str__(self):
-        return self.build_name
+        return self.name
 
 
 class Office(models.Model):
     """ Office model."""
     name = models.CharField(max_length=50)
     campus = models.ForeignKey(Campus)
-    office_buil = models.ManyToManyField(Building)
-    office_num = models.IntegerField(max_length=5)
+    building = models.ForeignKey(Building)
+    num = models.IntegerField(max_length=5)
     geom = models.PointField()
     objects = models.GeoManager()
 
@@ -64,7 +65,10 @@ class Faculty(models.Model):
     campus = models.ForeignKey(Campus)
     pic = models.ForeignKey(Pics)
     title = models.CharField(max_length=40)
-    office_buil = models.ForeignKey(Office)
+    num = models.IntegerField(max_length=5)
+    phone_num = models.CharField(max_length=15)
+    email = models.CharField(max_length=50)
+    building = models.CharField(max_length=100)
     primary_campus = models.ForeignKey(Campus)
     department = models.CharField(max_length=50)
     geom = models.PointField()
@@ -96,10 +100,9 @@ class Recreation(models.Model):
 class Classrooms(models.Model):
     """ Classrooms model.
     """
-    class_name = models.CharField(max_length=15)
+    name = models.CharField(max_length=15)
     campus = models.ForeignKey(Campus)
-    class_num = models.FloatField(max_length=10)
-    pics = models.ForeignKey(Pics)
+    num = models.FloatField(max_length=10)
     building = models.ForeignKey(Building)
     geom = models.PointField()
     objects = models.GeoManager()
