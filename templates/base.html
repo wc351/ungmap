@@ -1,16 +1,71 @@
 {% load analytical %}
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
 <head lang="en">
+    <link href = "{% static "bootstrap/css/bootstrap.css" %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href={% static 'map/navbar.css' %}>
     {% analytical_head_top %}
     <meta charset="UTF-8">
-    <title></title>
+    <title>{% block title %}{% endblock %}</title>
     {% analytical_head_bottom %}
 </head>
 <body>
 {% analytical_body_top %}
+{#Nav Bar #}
+			<nav class="navbar navbar-default" role="navigation">
+				<div class="navbar-header">
+					 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="/">UNG Map</a>
+				</div>
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li>
+							<a href="/map/aboutus">About Us</a>
+						</li>
+						<li>
+							<a href="/map/directories">Browse Directories</a>
+						</li>
+						<li class="dropdown">
+							 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Campuses<strong class="caret"></strong></a>
+							<ul class="dropdown-menu">
+								<li>
+									<a href="/map/gainesville">Gainesville</a>
+								</li>
+								<li>
+									<a href="/map/oconee">Oconee</a>
+								</li>
+								<li>
+									<a href="/map/cumming">Cumming</a>
+								</li>
+                                <li>
+									<a href="/map/dahlonega">Dahlonega</a>
+								</li>
+{#								<li class="divider">#}
+{#								</li>#}
+{#								<li>#}
+{#									<a href="#">Separated link</a>#}
+								</li>
+							</ul>
+						</li>
+					</ul>
+						</li>
 
 
+					</ul>
+				</div>
+
+			</nav>
+
+
+
+{% block content %}{% endblock %}
 {% analytical_body_top %}
 </body>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src=" {% static "bootstrap/js/bootstrap.min.js" %}"></script>
+{% block scriptspace %}
+{% endblock %}
 </html>
+
+

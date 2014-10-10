@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load analytical %}
+{% load staticfiles %}
+{% block title %}UNG Map{% endblock %}
+
+{% block content %}
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+                 <p>
+                    <h1 style="font-family: Tahoma; color: grey">UNG Campus Map</h1>
+                   </p>
+			<div class="carousel slide" id="carousel-512619" style= width: 750px>
+				<ol class="carousel-indicators">
+					<li class="active" data-slide-to="0" data-target="#carousel-512619">
+					</li>
+					<li data-slide-to="1" data-target="#carousel-512619">
+					</li>
+					<li data-slide-to="2" data-target="#carousel-512619">
+					</li>
+				</ol>
+				<div class="carousel-inner">
+					<div class="item active">
+                        <img alt= "" src="{% static "map/green.jpg" %}"/>
+						<div class="carousel-caption">
+							<h4>
+								Find Professors, Buildings, and more!
+							</h4>
+							<p>
+								Locate your classes and professors' offices along with their department and email address.
+							</p>
+						</div>
+					</div>
+					<div class="item">
+						<img src="{% static "map/orange.jpg" %}" />
+						<div class="carousel-caption">
+							<h4>
+								Lost? Cannot find the building you need?
+							</h4>
+							<p>
+								Explore the map and discover where you need to go
+							</p>
+						</div>
+					</div>
+					<div class="item">
+						<img alt="" src="{% static "map/pink.jpg" %}" />
+						<div class="carousel-caption">
+							<h4>
+								Parking Lots? No Problem.
+							</h4>
+							<p>
+                                Forgot what a lot was called? Click here to see the map of the parking lots!
+                            </p>
+
+						</div>
+					</div>
+				</div> <a class="left carousel-control" href="#carousel-512619" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> <a class="right carousel-control" href="#carousel-512619" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+			</div> <br>
+			<div class="search" id="searchbar">
+
+            <form>
+                  <input type="text" maxlength="300" id="search" placeholder="What are you looking for?" required>
+                    <Br><input type="radio" name="category"  value="building">Building
+                    <input type="radio" name="category" value="professor">Professor
+                    <input type="radio" name="category"  value="parking">Parking Lot
+                   <br><input type="button" value="search" class="sbutton">
+                <style type ="text/css">
+
+                 form {
+                width:300px;
+                margin:50px auto;
+                 }
+                 #search
+                 {
+                     font-family: Tahoma;
+                     font-size: 16px;
+                     width:250px;
+                 }
+
+                .search {
+                border:0px solid #dbdbdb;
+                   }
+                .sbutton {
+                font-family: Tahoma;
+                font-size: 20px;
+                position:relative;
+                padding:8px 15px;
+                left:80px;
+                border:2px solid #004080;
+                background-color:#004080;
+                color:#fafafa;
+                   }
+                .sbutton:hover  {
+                background-color:#fafafa;
+                color:#207cca;
+                }
+                </style>
+
+
+            </form>
+		</div>
+	</div>
+</div>
+{% endblock %}
