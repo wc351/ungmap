@@ -3,7 +3,9 @@ from django.contrib.gis.db import models
 
 class Pics(models.Model):
     """Pics model."""
-    name = models.CharField(max_length=40)
+
+    name = models.CharField(max_length=100)
+    pic_campus = models.CharField(max_length=50)
     pic = models.ImageField(upload_to='images/')
 
     def __str__(self):
@@ -15,7 +17,7 @@ class Campus(models.Model):
     name = models.CharField(max_length=50)
     pic = models.ForeignKey(Pics)
     location = models.CharField(max_length=50)
-    geom = models.PolygonField()
+    geom = models.PointField()
     objects = models.GeoManager()
 
     class Meta:
@@ -27,19 +29,20 @@ class Campus(models.Model):
 
 class Building(models.Model):
     """Building model"""
-    name = models.CharField(max_length=50)
-    descript = models.CharField(max_length=100)
+
+    name = models.CharField(max_length=75)
+    desc = models.CharField(max_length=100)
     pic = models.ForeignKey(Pics)
-    num = models.CharField(max_length=50)
+    build_num = models.CharField(max_length=10)
     campus = models.ForeignKey(Campus)
-    geom = models.PolygonField()
+    geom = models.GeometryField()
     objects = models.GeoManager()
 
     class Meta:
         verbose_name = 'Building'
 
     def __str__(self):
-        return self.name
+        return "name: {0}, geom:{1}".format(self.name, self.geom)
 
 
 class Office(models.Model):
@@ -62,16 +65,15 @@ class Faculty(models.Model):
     """ Teacher model.
     """
     name = models.CharField(max_length=150)
-    campus = models.ForeignKey(Campus)
-    pic = models.ForeignKey(Pics)
     title = models.CharField(max_length=40)
-    num = models.IntegerField(max_length=5)
+    campus = models.CharField(max_length=50)
+    building = models.CharField(max_length=50)
+    office_num = models.CharField(max_length=50)
     phone_num = models.CharField(max_length=15)
     email = models.CharField(max_length=50)
-    building = models.CharField(max_length=100)
     primary_campus = models.ForeignKey(Campus)
-    department = models.CharField(max_length=50)
-    geom = models.PointField()
+    department = models.CharField(max_length=75)
+    geom = models.GeometryField()
     objects = models.GeoManager()
 
     class Meta:
@@ -85,9 +87,9 @@ class Recreation(models.Model):
     """ Recreation model.
     """
     name = models.CharField(max_length=50)
-    campus = models.ForeignKey(Campus)
+    campus = models.ManyToManyField(Campus)
     pic = models.ForeignKey(Pics)
-    geom = models.MultiPolygonField()
+    geom = models.GeometryField()
     objects = models.GeoManager()
 
     class Meta:
@@ -117,11 +119,11 @@ class Classrooms(models.Model):
 class ParkingLots(models.Model):
     """ Parking lot models.
     """
-    lot_name = models.CharField(max_length=5)
+    lot_name = models.CharField(max_length=50)
     campus = models.ForeignKey(Campus)
     description = models.CharField(max_length=150)
     pics = models.ForeignKey(Pics)
-    geom = models.MultiPolygonField()
+    geom = models.GeometryField()
     objects = models.GeoManager()
 
     class Meta:
@@ -129,3 +131,6 @@ class ParkingLots(models.Model):
 
     def __str__(self):
         return self.lot_name
+
+
+
