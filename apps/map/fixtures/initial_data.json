@@ -13,7 +13,7 @@
         "model":"map.pics",
         "pk": 2,
         "fields":{
-            "name":"Continuing Education and Performing Arts",
+            "name":"Continuing Education and Performing Arts ",
             "pic_campus": "Gainesville",
             "pic": "apps/map/media/pics/g_ce.jpg"
         }
