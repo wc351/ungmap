@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.core.urlresolvers import resolve, reverse
-from apps.map.views import MainView, CampusCummingView, CampusDahlonegaView, CampusGainesvilleView, CampusOconeeView
-from apps.map.views import DirectoriesView, AboutusView
+from apps.map.views import MainView
+from apps.map.views import DirectoriesView, AboutusView, CampusListView, CampusDetailView, BuildingDetailView
 from apps.map.json_views import CampusCollection, BuildingCollection, FacultyCollection, RecreationCollection
 from apps.map.json_views import ClassroomCollection, ParkinglotCollection
 from apps.map import models
@@ -134,6 +134,24 @@ class UrlTests(TestCase):
         aboutus_view = resolve(reverse('map:aboutus'))
         return self.assertEqual(aboutus_view.func__name__,
                                 AboutusView.__name__)
+
+    def test_campus_lview(self):
+        campus_lview = resolve(reverse('map:campus_lview'))
+        return self.assertEqual(campus_lview.func__name__,
+                                CampusListView.__name__)
+
+    def test_campus_dview(self):
+        campus_dview = resolve(reverse('map:campus_dview'))
+        return self.assertEqual(campus_dview.func__name__,
+                                CampusDetailView.__name__)
+
+    def test_building_lview(self):
+        pass
+
+    def test_building_dview(self):
+        building_dview = resolve(reverse('map:building_dview'))
+        return self.assertEqual(building_dview.func__name__,
+                                BuildingDetailView.__name__)
 
     def test_api_campus(self):
         campus = resolve(reverse('map_api:campus_collection'))
