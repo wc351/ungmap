@@ -12,4 +12,5 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^map/', include('apps.map.urls', namespace='map')),
     url(r'^api/v1/', include('apps.map.api_urls', namespace='ungmap_api')),
+    url(r'^search/', include('haystack.urls')),
 )

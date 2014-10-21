@@ -1,0 +1,1 @@
+{{object.lot_name}}

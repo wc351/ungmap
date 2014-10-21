@@ -42,7 +42,7 @@ class Building(models.Model):
         verbose_name = 'Building'
 
     def __str__(self):
-        return "name: {0}, geom:{1}".format(self.name, self.geom)
+        return self.name
 
 
 class Office(models.Model):
@@ -87,7 +87,7 @@ class Recreation(models.Model):
     """ Recreation model.
     """
     name = models.CharField(max_length=50)
-    campus = models.ManyToManyField(Campus)
+    campus = models.ForeignKey(Campus)
     pic = models.ForeignKey(Pics)
     geom = models.GeometryField()
     objects = models.GeoManager()
@@ -113,7 +113,7 @@ class Classrooms(models.Model):
         verbose_name = 'Classrooms'
 
     def __str__(self):
-        return self.class_name
+        return self.name
 
 
 class ParkingLots(models.Model):
