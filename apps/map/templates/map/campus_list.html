@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Campus{% endblock %}
+{% block content %}
+<h1><b>List of University of North Georgia Campuses</b></h1>
+    <ul>
+    {% for campus in object_list %}
+    <li><a href="{% url 'map:campus_dview' campus.pk %}">{{ campus.name|capfirst}}</a></li>
+    {% endfor %}
+    </ul>
+
+{% endblock %}
