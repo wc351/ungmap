@@ -63,10 +63,14 @@ WSGI_APPLICATION = 'ungmap.wsgi.application'
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': os.path.join(BASE_DIR, 'Test.db'),
-    }
+'default': {
+'ENGINE': 'django.contrib.gis.db.backends.postgis',
+'NAME': 'ungmap',
+'USER': 'postgres',
+'PASSWORD': 'geografio',
+'HOST': 'localhost',
+'PORT': 5432,
+}
 }
 
 
