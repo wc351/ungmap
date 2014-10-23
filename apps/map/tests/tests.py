@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.core.urlresolvers import resolve, reverse
 from apps.map.views import MainView
-from apps.map.views import DirectoriesView, AboutusView, CampusListView, CampusDetailView, BuildingDetailView
+from apps.map.views import DirectoriesView, AboutusView, CampusListView, CampusDetailView, BuildingDetailView, BuildingListView
 from apps.map.json_views import CampusCollection, BuildingCollection, FacultyCollection, RecreationCollection
 from apps.map.json_views import ClassroomCollection, ParkinglotCollection
 from apps.map import models
@@ -146,7 +146,9 @@ class UrlTests(TestCase):
                                 CampusDetailView.__name__)
 
     def test_building_lview(self):
-        pass
+        building_lview =  resolve(reverse('map:building_lview'))
+        return self.assertEqual(building_lview.__name__,
+                                BuildingListView.__name__)
 
     def test_building_dview(self):
         building_dview = resolve(reverse('map:building_dview'))

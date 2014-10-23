@@ -42,6 +42,7 @@ INSTALLED_APPS = (
     'bootstrap',
     'analytical',
     'apps.map',
+    'haystack',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -63,14 +64,14 @@ WSGI_APPLICATION = 'ungmap.wsgi.application'
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 
 DATABASES = {
-'default': {
-'ENGINE': 'django.contrib.gis.db.backends.postgis',
-'NAME': 'ungmap',
-'USER': 'postgres',
-'PASSWORD': 'geografio',
-'HOST': 'localhost',
-'PORT': 5432,
-}
+    'default': {
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': os.environ['PGADMIN_DBNAME'],
+        'USER': os.environ['PGADMIN_USER'],
+        'PASSWORD': os.environ['PGADMIN_PW'],
+        'HOST': 'localhost',
+        'PORT': 5432,
+    }
 }
 
 
@@ -80,6 +81,8 @@ AWS_STORAGE_BUCKET_NAME = 'ungmap'
 MEDIA_ROOT = 'media/'
 STATIC_ROOT = 'static/'
 S3_URL = 'http://{}.s3.amazonaws.com/'.format(AWS_STORAGE_BUCKET_NAME)
+AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID_PW']
+AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY_PW']
 MEDIA_URL = S3_URL + MEDIA_ROOT
 STATIC_URL = S3_URL + STATIC_ROOT
 
@@ -101,3 +104,9 @@ TEMPLATE_DIRS = (
     os.path.join(BASE_DIR,  'templates'),
 )
 
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
+    },
+}
