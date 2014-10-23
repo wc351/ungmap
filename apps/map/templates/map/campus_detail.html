@@ -3,17 +3,17 @@
 {% block content %}
     <div class="row">
         <div class="col-md-8">
-            {% if image %}
-                <p><img src="{{ MEDIA_URL }}{{ pics.image }}" width=100% height=auto></p>
+            {% if campus.pic.pic %}
+                <p><img src="{{ MEDIA_URL }}{{ campus.pic.pic }}" width=100% height=auto></p>
                 <br>
             {% else %}
                 <p>No image exists at this time</p>
             {% endif %}
         </div>
         <div class="col-md-4">
-            <p><b> {{ data.name|capfirst }}</b><br>
-                <b>{{ data.location }}</b>
+            <p><b> {{ campus.name|capfirst }}</b><br>
+                <b>{{ campus.location }}</b>
         </div>
     </div>
-    <a href="">View Buildings</a>
+    <a href="/buildings/{{ campus.pk }}">View Buildings</a>
 {% endblock %}
