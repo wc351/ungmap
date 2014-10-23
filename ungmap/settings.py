@@ -42,7 +42,7 @@ INSTALLED_APPS = (
     'bootstrap',
     'analytical',
     'apps.map',
-    'haystack'
+    'haystack',
 )
 
 MIDDLEWARE_CLASSES = (

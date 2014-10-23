@@ -5,7 +5,7 @@ class Pics(models.Model):
     """Pics model."""
 
     name = models.CharField(max_length=100)
-    pic_campus = models.CharField(max_length=50)
+    pic_campus = models.CharField(max_length=75)
     pic = models.ImageField(upload_to='images/')
 
     def __str__(self):

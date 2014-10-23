@@ -17,21 +17,19 @@ class CampusDetailView(generic.TemplateView):
     def get_context_data(self, **kwargs):
         """Adding images to context"""
         context = super(CampusDetailView, self).get_context_data()
-#        image = models.Pics.objects.filter(pk=kwargs['pk']).first()
         data = models.Campus.objects.filter(pk=kwargs['pk']).first()
-#        context['image'] = image
-        context['data'] = data
+        context['campus'] = data
         return context
 
 
-#class BuildingListView(generic.TemplateView):
-#    template_name = "map/building_list.html"
-#
-#    def get_context_data(self, **kwargs):
-#        context = super(BuildingListView, self).get_context_data()
-#        data = models.Building.filter(pk=kwargs['pk']).first()
-#        context['data'] = data
-#        return context
+class BuildingListView(generic.TemplateView):
+    template_name = "map/building_list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(BuildingListView, self).get_context_data()
+        data = models.Building.objects.filter(campus=kwargs['campus'])
+        context['buildings'] = data
+        return context
 
 
 class BuildingDetailView(generic.DetailView):

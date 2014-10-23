@@ -176,6 +176,7 @@
         "pk": 20,
         "fields":{
             "name":"Lot M",
+            "pic_campus":"Gainesville",
             "pic": "apps/map/media/pics/g_lot_m.jpg"
         }
     },
@@ -184,6 +185,7 @@
         "pk": 21,
         "fields":{
             "name":"Lot N",
+            "pic_campus":"Gainesville",
             "pic": "apps/map/media/picsnoimage.jpg"
         }
     },
@@ -192,6 +194,7 @@
         "pk": 22,
         "fields":{
             "name":"Lot O",
+            "pic_campus":"Gainesville",
             "pic": "apps/map/media/picsnoimage.jpg"
         }
     },
@@ -200,6 +203,7 @@
         "pk": 23,
         "fields":{
             "name":"Lot P",
+            "pic_campus":"Gainesville",
             "pic": "apps/map/media/picsnoimage.jpg"
         }
     },
@@ -208,6 +212,7 @@
         "pk": 24,
         "fields":{
             "name":"Lot Q",
+            "pic_campus":"Gainesville",
             "pic": "apps/map/media/picsnoimage.jpg"
         }
     },
@@ -216,6 +221,7 @@
         "pk": 25,
         "fields":{
             "name":"Lot R",
+            "pic_campus":"Gainesville",
             "pic": "apps/map/media/pics/g_lot_r.jpg"
         }
     },            {
@@ -223,6 +229,7 @@
         "pk": 26,
         "fields":{
             "name":"Lot S",
+            "pic_campus":"Gainesville",
             "pic": "apps/map/media/pics/g_lot_s.jpg"
         }
     },
@@ -231,6 +238,7 @@
         "pk": 27,
         "fields":{
             "name":"Over Flow Parking",
+            "pic_campus":"Gainesville",
             "pic": "apps/map/media/picsnoimage.jpg"
         }
     },
@@ -239,6 +247,7 @@
         "pk": 28,
         "fields":{
             "name":"Parking Deck",
+            "pic_campus":"Gainesville",
             "pic": "apps/map/media/pics/g_parkingdeck.jpg"
         }
     },

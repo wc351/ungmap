@@ -4,8 +4,8 @@
 {% block content %}
 <h1><b>List of University of North Georgia Buildings</b></h1>
     <ul>
-    {% for buildings in data.name %}
-    <li><a href="{% url 'map:building_dview' buildings.pk %}">{{ buildings.name|capfirst}}</a></li>
+    {% for building in buildings %}
+    <li><a href="{% url 'map:building_dview' building.pk %}">{{ building.name|capfirst}}</a></li>
     {% endfor %}
     </ul>
 
