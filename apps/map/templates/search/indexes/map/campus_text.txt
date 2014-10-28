@@ -1,0 +1,3 @@
+{{object.name}}
+{{object.build_num }}
+{{object.location}}

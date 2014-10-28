@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-8">
+            {% if campus.pic.pic %}
+                <p><img src="{{ MEDIA_URL }}{{ campus.pic.pic }}" width=100% height=auto></p>
+                <br>
+            {% else %}
+                <p>No image exists at this time</p>
+            {% endif %}
+        </div>
+        <div class="col-md-4">
+            <p><b> {{ campus.name|capfirst }}</b><br>
+                <b>{{ campus.location }}</b>
+        </div>
+    </div>
+    <a href="/buildings/{{ campus.pk }}">View Buildings</a>
+{% endblock %}
