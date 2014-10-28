@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-8">
+            {% if building.pic.pic %}
+                <p><img src="{{ MEDIA_URL }}{{ building.pic.pic }}" width=100% height=auto></p>
+                <br>
+            {% else %}
+                <p>No image exists at this time</p>
+            {% endif %}
+        </div>
+        <div class="col-md-4">
+            <p><b> {{ building.name|capfirst }}</b><br>
+                <b>{{ building.desc }}</b>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load analytical %}
+{% load staticfiles %}
+
+   {% block title %}About Us{% endblock %}
+{% block content %}
+
+<h1 style="font-family: Tahoma"><center>
+    About UngMap
+</h1></center>
+    <p style="font-family: Tahoma"><center>UNGmap is a website to help students at the University of North Georgia
+    find buildings, parking lots, recreation areas, and faculty members. We
+    wanted to make this helpful website since UNG has gone through some huge changes over the
+    last couple of year.  In 2013, Gainesville State College and North Georgia College & State University
+    merged into the University of North Georgia.  Because of the merge, several buildings had their names change,
+    students began going to more than one campus, and parking lots were either being built or shutdown.  We hope students
+    will use this website to figure how to navigate all four UNG campuses.</center></p>
+    <br><br><br><br>
+    <h2 style="font-family: Tahoma;"><center>
+    About the Programmers
+    </h2></center>
+   <div class="column-center">
+<a href="https://github.com/wc351"><img alt="" src="{% static "map/tiny_will.jpg" %}" /></a>
+       <h4>Will Cox</h4>
+            <p>Will's Bio</p>
+   </div>
+   <div class="column-left">
+<a href="https://github.com/crlyli"><img alt="" src="{% static "map/tiny_crystal.jpg" %}" /></a>
+       <h4>Crystal Lyliston</h4>
+            <p>Crystal's Bio</p>
+   </div>
+   <div class="column-right">
+   <a href="https://github.com/clsmit8703"><img alt="" src="{% static "map/tiny_corryn.jpg" %}" /></a>
+       <h4>Corryn Smith</h4>
+            <p>Corryn's Bio</p>
+   </div>
+
+<style type="text/css">
+
+    .column-left{ font-family: Tahoma; float: left; width: 33%; }
+    .column-right{ font-family: Tahoma;float: right; width: 33%; }
+    .column-center{ font-family: Tahoma; display: inline-block; width: 33%; }
+
+</style>
+</div>
+{% endblock %}
