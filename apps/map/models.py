@@ -22,6 +22,7 @@ class Campus(models.Model):
 
     class Meta:
         verbose_name = 'Campus'
+        verbose_name_plural = 'Campuses'
 
     def __str__(self):
         return self.name
@@ -78,6 +79,7 @@ class Faculty(models.Model):
 
     class Meta:
         verbose_name = 'Faculty'
+        verbose_name_plural = 'Faculty'
 
     def __str__(self):
         return self.name
@@ -128,6 +130,7 @@ class ParkingLots(models.Model):
 
     class Meta:
         verbose_name = 'Parking_Lots'
+        verbose_name_plural = 'Parking Lots'
 
     def __str__(self):
         return self.lot_name
