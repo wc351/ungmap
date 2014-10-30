@@ -27,29 +27,29 @@
 								Find Professors, Buildings, and more!
 							</h3>
                             <p>
-                                <a href="/directories"><button type="button" class="btn btn-info">Locate Directories</button></a>
+                                <a href="/map/directories"><button type="button" class="btn btn-info">Locate Directories</button></a>
                             </p>
 						</div>
 					</div>
 					<div class="item">
-						<img src="{% static "map/dahlonega.JPG" %}" />
+						<img src="{% static "map/pan.jpg" %}" />
 						<div class="carousel-caption">
 							<h3>
 								Lost? Cannot find the building you need?
 							</h3>
 							<p>
-								<a href="/campus"><button type="button" class="btn btn-info">Explore Maps</button></a>
+								<a href="/map/campus"><button type="button" class="btn btn-info">Explore Maps</button></a>
 							</p>
 						</div>
 					</div>
 					<div class="item">
-						<img alt="" src="{% static "map/dah2.jpg" %}" />
+						<img alt="" src="{% static "map/pink.jpg" %}" />
 						<div class="carousel-caption">
 							<h3>
 								Parking Lots? No Problem.
 							</h3>
                             <p>
-								<a href="/campus"><button type="button" class="btn btn-info">Parking Lots</button></a>
+								<a href="/map/campus"><button type="button" class="btn btn-info">Parking Lots</button></a>
                             </p>
 
 
@@ -57,34 +57,14 @@
 					</div>
 				</div> <a class="left carousel-control" href="#carousel-512619" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> <a class="right carousel-control" href="#carousel-512619" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
 			</div> <br>
-{# Crystal's Haystack Code for the search #}
-            <form method="get" action="">
+			<div class="search" id="searchbar">
+
+            <form>
                   <input type="text" maxlength="300" id="search" placeholder="What are you looking for?" required>
-                   <input type="submit" value="search" class="sbutton">
-                        {% if query %}
-                            <h3>Results</h3>
-
-                            {% for result in page.object_list %}
-                                <p>
-                                    <a href="{{ result.object.get_absolute_url }}">{{ result.object }}</a>
-                                </p>
-                            {% empty %}
-                                <p>No results found.</p>
-                            {% endfor %}
-
-                            {% if page.has_previous or page.has_next %}
-                                <div>
-                                    {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
-                                    |
-                                    {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
-                                </div>
-                            {% endif %}
-                        {% else %}
-                            {# Show some example queries to run, maybe query syntax, something else? #}
-                        {% endif %}
-                </form>
-
-{# CSS to style the search bar and the submit button #}
+                    <Br><input type="radio" name="category"  value="building">Building
+                    <input type="radio" name="category" value="professor">Professor
+                    <input type="radio" name="category"  value="parking">Parking Lot
+                   <br><input type="button" value="search" class="sbutton">
                 <style type ="text/css">
 
                  form {

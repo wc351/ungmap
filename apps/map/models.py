@@ -22,7 +22,6 @@ class Campus(models.Model):
 
     class Meta:
         verbose_name = 'Campus'
-        verbose_name_plural = 'Campuses'
 
     def __str__(self):
         return self.name
@@ -32,9 +31,9 @@ class Building(models.Model):
     """Building model"""
 
     name = models.CharField(max_length=75)
-    desc = models.CharField(max_length=100)
+    desc = models.CharField(max_length=100, null=True)
     pic = models.ForeignKey(Pics)
-    build_num = models.CharField(max_length=10)
+    build_num = models.CharField(max_length=10, null=True)
     campus = models.ForeignKey(Campus)
     geom = models.GeometryField()
     objects = models.GeoManager()
@@ -70,7 +69,7 @@ class Faculty(models.Model):
     campus = models.CharField(max_length=50)
     building = models.CharField(max_length=50)
     office_num = models.CharField(max_length=50)
-    phone_num = models.CharField(max_length=15)
+    phone_num = models.CharField(max_length=15, null=True)
     email = models.CharField(max_length=50)
     primary_campus = models.ForeignKey(Campus)
     department = models.CharField(max_length=75)
@@ -79,7 +78,6 @@ class Faculty(models.Model):
 
     class Meta:
         verbose_name = 'Faculty'
-        verbose_name_plural = 'Faculty'
 
     def __str__(self):
         return self.name
@@ -123,14 +121,13 @@ class ParkingLots(models.Model):
     """
     lot_name = models.CharField(max_length=50)
     campus = models.ForeignKey(Campus)
-    description = models.CharField(max_length=150)
+    description = models.CharField(max_length=150, null=True)
     pics = models.ForeignKey(Pics)
     geom = models.GeometryField()
     objects = models.GeoManager()
 
     class Meta:
         verbose_name = 'Parking_Lots'
-        verbose_name_plural = 'Parking Lots'
 
     def __str__(self):
         return self.lot_name
