@@ -63,6 +63,7 @@ class Faculty(models.Model):
 
     class Meta:
         verbose_name = 'Faculty'
+        verbose_name_plural = 'Faculty'
 
     def __str__(self):
         return self.name
