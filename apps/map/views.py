@@ -35,26 +35,39 @@ class BuildingListView(generic.TemplateView):
 class BuildingDetailView(generic.DetailView):
     model = models.Building
     template_name = "map/building_detail.html"
+    context_object_name = 'building'
 
 
-class CampusGainesvilleView(generic.TemplateView):
-    """Loads Gainesville Campus"""
-    template_name = 'map/gainesville.html'
+class ParkingLotListView(generic.TemplateView):
+    template_name = "map/parkinglots_list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(ParkingLotListView, self).get_context_data()
+        data = models.ParkingLots.objects.filter(campus=kwargs['campus'])
+        context['parkinglots'] = data
+        return context
 
 
-class CampusOconeeView(generic.TemplateView):
-    """Loads Gainesville Campus"""
-    template_name = 'map/oconee.html'
+class ParkingLotDetailView(generic.DetailView):
+    model = models.ParkingLots
+    template_name = "map/parkinglots_detail.html"
+    context_object_name = 'parkinglot'
 
 
-class CampusCummingView(generic.TemplateView):
-    """Loads Gainesville Campus"""
-    template_name = 'map/cumming.html'
+class FacultyListView(generic.TemplateView):
+    template_name = "map/faculty_list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super(FacultyListView, self).get_context_data()
+        data = models.Faculty.objects.filter(campus=kwargs['campus'])
+        context['faculty'] = data
+        return context
 
 
-class CampusDahlonegaView(generic.TemplateView):
-    """Loads Gainesville Campus"""
-    template_name = 'map/dahlonega.html'
+class FacultyDetailView(generic.DetailView):
+    model = models.Faculty
+    template_name = "map/faculty_detail.html"
+    context_object_name = 'faculty'
 
 
 class AboutusView(generic.TemplateView):
