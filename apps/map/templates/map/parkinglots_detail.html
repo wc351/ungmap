@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-8">
+            {% if parkinglot.pic.pic %}
+                <p><img src="{{ MEDIA_URL }}{{ parkinglot.pic.pic }}" width=100% height=auto></p>
+                <br>
+            {% else %}
+                <p>No image exists at this time</p>
+            {% endif %}
+        </div>
+        <div class="col-md-4">
+            <p><b> {{ parkinglot.lot_name|capfirst }}</b></p>
+        </div>
+    </div>
+{% endblock %}

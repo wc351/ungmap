@@ -369,7 +369,7 @@
     "model": "map.building",
     "pk": 7,
     "fields": {
-        "name": "Science, Engineering, and Technology ",
+        "name": "Science, Engineering, and Technology",
         "desc": "Some description",
         "pic": 5,
         "build_num": "13",
