@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'analytical',
     'apps.map',
     'haystack',
+    'registration',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -66,9 +67,9 @@ WSGI_APPLICATION = 'ungmap.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': os.environ['PGADMIN_DBNAME'],
-        'USER': os.environ['PGADMIN_USER'],
-        'PASSWORD': os.environ['PGADMIN_PW'],
+        'NAME': 'ungmap',
+        'USER': 'postgres',
+        'PASSWORD': 'geografio',
         'HOST': 'localhost',
         'PORT': 5432,
     }
@@ -78,11 +79,11 @@ DATABASES = {
 DEFAULT_FILE_STORAGE = 'ungmap.s3utils.MediaRootS3BotoStorage'
 STATICFILES_STORAGE = 'ungmap.s3utils.MediaRootS3BotoStorage'
 AWS_STORAGE_BUCKET_NAME = 'ungmap'
+AWS_ACCESS_KEY_ID = 'AKIAIMO2QEEKUP23MHIA'
+AWS_SECRET_ACCESS_KEY = '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'
 MEDIA_ROOT = 'media/'
 STATIC_ROOT = 'static/'
 S3_URL = 'http://{}.s3.amazonaws.com/'.format(AWS_STORAGE_BUCKET_NAME)
-AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID_PW']
-AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY_PW']
 MEDIA_URL = S3_URL + MEDIA_ROOT
 STATIC_URL = S3_URL + STATIC_ROOT
 
