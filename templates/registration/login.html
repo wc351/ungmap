@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+<div class="container">
+	<div class="row clearfix">
+        <div class="col-md-4 column"></div>
+		<div class="col-md-4 column">
+
+        <form class="form-horizontal" method="post" action=".">{% csrf_token %}
+
+        <h2 class="text-center header">Please Sign In</h2>
+
+            <input type="text" class="form-control span3float" placeholder="Username"  autofocus id="id_username" name="username">
+            <input type="password" class="form-control span3float" placeholder="Password" id="id_password" name="password">
+
+        <button class="btn btn-lg btn-primary btn-block span3" type="submit">Sign in</button>
+
+        <label style="font-size: 8pt" class="checkbox span4">
+        <input type="checkbox" value="remember-me">Remember me</label>
+
+        <a style="font-size: 12pt" href='/accounts/register/'>Need An Account?</a>
+        </form>
+        </div>
+
+        <div class="col-md-4 column"></div>
+        </div>
+</div>
+{% endblock %}
