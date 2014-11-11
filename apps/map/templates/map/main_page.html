@@ -58,32 +58,8 @@
 				</div> <a class="left carousel-control" href="#carousel-512619" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> <a class="right carousel-control" href="#carousel-512619" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
 			</div> <br>
 {# Crystal's Haystack Code for the search #}
-            <form method="get" action="">
-                  <input type="text" maxlength="300" id="search" placeholder="What are you looking for?" required>
-                   <input type="submit" value="search" class="sbutton">
-                        {% if query %}
-                            <h3>Results</h3>
-
-                            {% for result in page.object_list %}
-                                <p>
-                                    <a href="{{ result.object.get_absolute_url }}">{{ result.object }}</a>
-                                </p>
-                            {% empty %}
-                                <p>No results found.</p>
-                            {% endfor %}
-
-                            {% if page.has_previous or page.has_next %}
-                                <div>
-                                    {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; Previous{% if page.has_previous %}</a>{% endif %}
-                                    |
-                                    {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}Next &raquo;{% if page.has_next %}</a>{% endif %}
-                                </div>
-                            {% endif %}
-                        {% else %}
-                            {# Show some example queries to run, maybe query syntax, something else? #}
-                        {% endif %}
-                </form>
-
+             <input type="text" maxlength="300" id="search_box" placeholder="What are you looking for?" required>
+             <input type="submit" value="search" class="sbutton" onclick="window.location='/search/?q=' + $('#search_box').val()">
 {# CSS to style the search bar and the submit button #}
                 <style type ="text/css">
 
@@ -116,9 +92,6 @@
                 color:#207cca;
                 }
                 </style>
-
-
-            </form>
 		</div>
 	</div>
 </div>
