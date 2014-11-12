@@ -1,4 +1,5 @@
 from django.contrib.gis.db import models
+from django.core.urlresolvers import reverse_lazy
 
 
 class Campus(models.Model):
@@ -11,6 +12,9 @@ class Campus(models.Model):
     class Meta:
         verbose_name = 'Campus'
         verbose_name_plural = 'Campuses'
+
+    def get_absolute_url(self):
+        return reverse_lazy('map:campus_dview', kwargs={'pk': self.pk})
 
     def __str__(self):
         return self.name
@@ -29,8 +33,11 @@ class Building(models.Model):
     class Meta:
         verbose_name = 'Building'
 
+    def get_absolute_url(self):
+        return reverse_lazy('map:building_dview', kwargs={'pk': self.pk})
+
     def __str__(self):
-        return self.name
+        return "Building Name: {0}, {1} Campus".format(self.name, self.campus.name)
 
 
 class Office(models.Model):
@@ -44,6 +51,9 @@ class Office(models.Model):
 
     class Meta:
         verbose_name = 'Office'
+
+    def get_absolute_url(self):
+        return reverse_lazy('map:office_dview', kwargs={'pk': self.pk})
 
     def __str__(self):
         return self.name, self.office_buil
@@ -65,8 +75,11 @@ class Faculty(models.Model):
         verbose_name = 'Faculty'
         verbose_name_plural = 'Faculty'
 
+    def get_absolute_url(self):
+        return reverse_lazy('map:faculty_dview', kwargs={'pk': self.pk})
+
     def __str__(self):
-        return self.name
+        return "Name: {0}, {1} Campus".format(self.name, self.campus.name)
 
 
 class Recreation(models.Model):
@@ -79,6 +92,9 @@ class Recreation(models.Model):
 
     class Meta:
         verbose_name = 'Rec Areas'
+
+    def get_absolute_url(self):
+        return reverse_lazy('map:recreation_dview', kwargs={'pk': self.pk})
 
     def __str__(self):
         return self.name
@@ -97,6 +113,9 @@ class Classrooms(models.Model):
     class Meta:
         verbose_name = 'Classrooms'
 
+    def get_absolute_url(self):
+        return reverse_lazy('map:classroom_dview', kwargs={'pk': self.pk})
+
     def __str__(self):
         return self.name
 
@@ -114,8 +133,11 @@ class ParkingLots(models.Model):
         verbose_name = 'Parking_Lots'
         verbose_name_plural = 'Parking Lots'
 
+    def get_absolute_url(self):
+        return reverse_lazy('map:parkinglot_dview', kwargs={'pk': self.pk})
+
     def __str__(self):
-        return self.lot_name
+        return "{0}, {1} Campus".format(self.lot_name, self.campus.name)
 
 
 class CampusPics(models.Model):

@@ -79,20 +79,3 @@ class DirectoriesView(generic.TemplateView):
     """Loads Gainesville Campus"""
     template_name = 'map/directories.html'
 
-
-class ParkingLotsView(generic.CreateView):
-    """Loads the parking lots"""
-    template_name = 'map/parkinglots.html'
-    model = models.ParkingLots
-
-
-class FacultyView(generic.CreateView):
-    """Loads the faculty"""
-    template_name = 'map/faculty.html'
-    model = models.Faculty
-
-
-class RecreationView(generic.CreateView):
-    """Loads recreation locations"""
-    template_name = 'map/recreation.html'
-    model = models.Recreation
