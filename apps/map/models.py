@@ -24,6 +24,7 @@ class Building(models.Model):
     """Building model"""
 
     name = models.CharField(max_length=75)
+    alter_name = models.CharField(max_length=500, null=True)
     desc = models.CharField(max_length=100, null=True)
     build_num = models.CharField(max_length=10, null=True)
     campus = models.ForeignKey(Campus)
@@ -155,7 +156,7 @@ class BuildingPics(models.Model):
     """Pics model."""
 
     name = models.CharField(max_length=100)
-    campus = models.ForeignKey(Building)
+    building = models.ForeignKey(Building)
     pic = models.ImageField(upload_to='images/')
 
     def __str__(self):
