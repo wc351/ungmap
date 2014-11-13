@@ -12,7 +12,10 @@
         </div>
         <div class="col-md-4">
             <p><b> {{ building.name|capfirst }}</b><br>
-                <b>{{ building.desc }}</b>
+                <b>{{ building.desc }}</b><br>
+                <b>Alternate Building Names:</b><br>
+                    {{ building.alter_name }}</p>
+
         </div>
     </div>
 {% endblock %}
