@@ -5,10 +5,10 @@ import django
 django.setup()
 
 
-path1 = 'C:/Users/crlyli0476/Desktop/ungmap_reproject/Gainesville_buildings.shp'
-path2 = 'C:/Users/crlyli0476/Desktop/ungmap_reproject/Oconee_buildings.shp'
-path3 = 'C:/Users/crlyli0476/Desktop/ungmap_reproject/Cumming_buildings.shp'
-path4 = 'C:/Users/crlyli0476/Desktop/ungmap_reproject/Dahlonega_buildings2.shp'
+path1 = 'C:/Users/wecox1088/Desktop/ungmap_data/Gainesville_buildings.shp'
+path2 = 'C:/Users/wecox1088/Desktop/ungmap_data/Oconee_buildings.shp'
+path3 = 'C:/Users/wecox1088/Desktop/ungmap_data/Cumming_buildings.shp'
+path4 = 'C:/Users/wecox1088/Desktop/ungmap_data/Dahlonega_buildings2.shp'
 
 sf1 = shapefile.Reader(path1)
 sr1 = sf1.shapeRecords()

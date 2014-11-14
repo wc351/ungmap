@@ -18,4 +18,5 @@ urlpatterns = patterns('',
     url(r'^aboutus$', views.AboutusView.as_view(), name= 'aboutus'),
     url(r'^directories$', views.DirectoriesView.as_view(), name='directories'),
 #    url(r'search$', name=basic_search(template='search.html')),
+    url(r'^g_building_map/$', views.TestMapView.as_view(), name='Test_Map'),
 )

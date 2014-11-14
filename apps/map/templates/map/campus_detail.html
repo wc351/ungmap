@@ -18,4 +18,7 @@
     <a href="{% url 'map:building_lview' campus.pk %}">View Buildings</a><br>
     <a href="{% url 'map:parkinglot_lview' campus.pk %}">View Parking Lots</a><br>
     <a href="{% url 'map:faculty_lview' campus.pk %}">View Faculty Members</a>
+    <br>
+    {% include "map/gainesville_map.html" %}
+
 {% endblock %}
