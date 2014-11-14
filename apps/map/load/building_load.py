@@ -5,10 +5,10 @@ import django
 django.setup()
 
 
-path1 = 'C:/Users/wecox1088/Desktop/ungmap_data/Gainesville_buildings.shp'
-path2 = 'C:/Users/wecox1088/Desktop/ungmap_data/Oconee_buildings.shp'
-path3 = 'C:/Users/wecox1088/Desktop/ungmap_data/Cumming_buildings.shp'
-path4 = 'C:/Users/wecox1088/Desktop/ungmap_data/Dahlonega_buildings2.shp'
+path1 = 'C:/Users/crlyli0476/Desktop/ungmap/ungmap_reproject/Gainesville_buildings.shp'
+path2 = 'C:/Users/crlyli0476/Desktop/ungmap/ungmap_reproject/Oconee_buildings.shp'
+path3 = 'C:/Users/crlyli0476/Desktop/ungmap/ungmap_reproject/Cumming_buildings.shp'
+path4 = 'C:/Users/crlyli0476/Desktop/ungmap/ungmap_reproject/Dahlonega_buildings2.shp'
 
 sf1 = shapefile.Reader(path1)
 sr1 = sf1.shapeRecords()
@@ -27,27 +27,27 @@ Cumming_cam = Campus.objects.filter(pk=4).first()
 for r in sr1:
     geom = r.shape.__geo_interface__
 
-    d = Building(name=r.record[2], desc=r.record[3], build_num=r.record[4], campus=Gainesville_cam, geom=json.dumps(geom))
-    print d
+    d = Building(name=r.record[2], desc=r.record[3], build_num=r.record[4], alter_name=r.record[5], campus=Gainesville_cam, geom=json.dumps(geom))
     d.save()
+print "Gainesville Done"
 
 for r in sr2:
     geom = r.shape.__geo_interface__
 
-    d = Building(name=r.record[1], desc=r.record[10], build_num=r.record[9], campus=Oconee_cam, geom=json.dumps(geom))
-    print d
+    d = Building(name=r.record[1], desc=r.record[10], build_num=r.record[9], alter_name=r.record[11], campus=Oconee_cam, geom=json.dumps(geom))
     d.save()
+print "Oconee Done"
 
 for r in sr3:
     geom = r.shape.__geo_interface__
 
-    d = Building(name=r.record[12], desc=r.record[13], build_num=r.record[1], campus=Cumming_cam, geom=json.dumps(geom))
-    print d
+    d = Building(name=r.record[12], desc=r.record[13], build_num=r.record[1], alter_name=r.record[15], campus=Cumming_cam, geom=json.dumps(geom))
     d.save()
+print "Cumming Done"
 
 for r in sr4:
     geom = r.shape.__geo_interface__
 
-    d = Building(name=r.record[12], desc=r.record[13], build_num=r.record[1], campus=Dahlonega_cam, geom=json.dumps(geom))
-    print d
+    d = Building(name=r.record[12], desc=r.record[13], build_num=r.record[1], alter_name=r.record[15], campus=Dahlonega_cam, geom=json.dumps(geom))
     d.save()
+print "Dahlonega Done"
