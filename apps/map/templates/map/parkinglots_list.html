@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Campus{% endblock %}
+{% block content %}
+<h1><b>List of University of North Georgia Parking Lots<br></b></h1>
+    <ul>
+    {% for parkinglot in parkinglots %}
+    <li><a href="{% url 'map:parkinglot_dview' parkinglot.pk %}">{{ parkinglot.lot_name|capfirst}}</a></li>
+    {% endfor %}
+    </ul>
+
+{% endblock %}

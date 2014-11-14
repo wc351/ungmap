@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+
+{% block title %}Ceate Profile{% endblock %}
+
+{% block head %}Create Profile{% endblock %}
+
+{% block content %}
+	<div class="row clearfix">
+        <div class="col-md-4 column"></div>
+		<div class="col-md-4 column">
+
+         <form class="form-horizontal" method="post" action=".">{% csrf_token %}
+
+                    <h2 class="text-center header">Please Register</h2>
+                    <input type="text" class="form-control span3float" placeholder="Username" autofocus id="id_username" name="username" required>
+                    <input type="email" class="form-control span3float" placeholder="Email" id="id_email" name="email" required>
+                    <input type="password" class="form-control span3float" placeholder="Password" id="id_password1" name="password1" required>
+                    <input type="password" class="form-control span3float" placeholder="Password Again" id="id_password2" name="password2" required>
+                    <button class="btn btn-lg btn-primary btn-block span3" type="submit">Register</button>
+
+
+        </form>
+            </div>
+        <div class="col-md-4 column"></div>
+        </div>
+{% endblock %}
+
+
+
+
+

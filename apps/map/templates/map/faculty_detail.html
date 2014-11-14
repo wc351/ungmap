@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <p><b> {{ faculty.name|capfirst }}</b><br>
+        <b>Title:</b> {{ faculty.title }}<br>
+        <b>Department:</b> {{ faculty.department }}<br>
+        <b>Email Address:</b> {{ faculty.email }}<br>
+        <b>Phone Number:</b> {{ faculty.phone_num }}<br>
+        <b>Office Building:</b> {{ faculty.building }}<br>
+        <b>Office Number:</b> {{ faculty.office_num }}</p>
+
+{% endblock %}
