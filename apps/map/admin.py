@@ -3,7 +3,7 @@ from django.contrib.gis import admin
 # Register your models here.
 from apps.map import models
 
-admin.site.register(models.Campus, admin.GeoModelAdmin)
+admin.site.register(models.Campus, admin.OSMGeoAdmin)
 admin.site.register(models.Building, admin.GeoModelAdmin)
 admin.site.register(models.Classrooms)
 admin.site.register(models.Faculty, admin.GeoModelAdmin)

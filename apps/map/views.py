@@ -78,8 +78,3 @@ class AboutusView(generic.TemplateView):
 class DirectoriesView(generic.TemplateView):
     """Loads Gainesville Campus"""
     template_name = 'map/directories.html'
-
-
-class TestMapView(generic.TemplateView):
-    """ This is for testing out the map. """
-    template_name = 'map/gainesville_map.html'

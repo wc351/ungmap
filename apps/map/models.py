@@ -7,6 +7,7 @@ class Campus(models.Model):
     name = models.CharField(max_length=50)
     location = models.CharField(max_length=50)
     geom = models.PointField()
+    box = models.PolygonField(default=None, null=True, blank=True)
     objects = models.GeoManager()
 
     class Meta:
@@ -17,7 +18,7 @@ class Campus(models.Model):
         return reverse_lazy('map:campus_dview', kwargs={'pk': self.pk})
 
     def __str__(self):
-        return self.name
+        return "{}-{}".format(self.pk, self.name)
 
 
 class Building(models.Model):
