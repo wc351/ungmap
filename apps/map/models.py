@@ -141,6 +141,44 @@ class ParkingLots(models.Model):
         return "{0}, {1} Campus".format(self.lot_name, self.campus.name)
 
 
+class ParkingSpots(models.Model):
+    """Parking spot model
+    """
+    spot_type = models.CharField(max_length=50)
+    campus = models.ForeignKey(Campus)
+    geom = models.GeometryField()
+    objects = models.GeoManager()
+
+    class Meta:
+        verbose_name = 'Parking Spots'
+
+    def __str__(self):
+        return "{0}, {1} Campus".format(self.spot_type, self.campus.name)
+
+
+class ParkingLotLines(models.Model):
+    """Parking lot line model
+    """
+    name = models.CharField(max_length=50)
+    campus = models.ForeignKey(Campus)
+    geom = models.LineStringField()
+    objects = models.GeoManager()
+
+    class Meta:
+        verbose_name = 'Parking Lot Lines'
+
+    def __str__(self):
+        return "{0}, {1} Campus".format(self.name, self.campus.name)
+
+
+class CallBoxes(models.Model):
+    """Call Box Model"""
+    name = models.CharField(max_length=50)
+    campus = models.ForeignKey(Campus)
+    geom = models.PointField()
+    objects = models.GeoManager()
+
+
 class CampusPics(models.Model):
     """Pics model."""
 
