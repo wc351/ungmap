@@ -4,7 +4,7 @@ import django
 django.setup()
 
 
-path1='C:/Users/crlyli0476/Desktop/ungmap/ungmap_reproject/Campus/campuses.shp'
+path1='C:/Users/wecox1088/Desktop/UNGMap_Data/Campus/campuses.shp'
 
 sf = shapefile.Reader(path1)
 sr = sf.shapeRecords()
