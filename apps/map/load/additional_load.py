@@ -8,7 +8,7 @@ django.setup()
 Gainesville_cam = Campus.objects.filter(pk=1).first()
 
 
-path1='C:/Users/crlyli0476/Desktop/ungmap/ungmap_reproject/tennis.shp'
+path1='C:/Users/clsmit8703/Desktop/Data/ungmap_reproject/tennis.shp'
 sf1 = shapefile.Reader(path1)
 sr1 = sf1.shapeRecords()
 
@@ -18,7 +18,7 @@ for r in sr1:
     d.save()
 print "Done"
 
-path2='C:/Users/crlyli0476/Desktop/ungmap/ungmap_reproject/track.shp'
+path2='C:/Users/clsmit8703/Desktop/Data/ungmap_reproject/track.shp'
 sf2 = shapefile.Reader(path2)
 sr2 = sf2.shapeRecords()
 
@@ -29,7 +29,7 @@ for r in sr2:
 print "Done"
 
 
-path3='C:/Users/crlyli0476/Desktop/ungmap/ungmap_reproject/parkinglines.shp'
+path3='C:/Users/clsmit8703/Desktop/Data/ungmap_reproject/parkinglines.shp'
 sf3 = shapefile.Reader(path3)
 sr3 = sf3.shapeRecords()
 
@@ -50,7 +50,7 @@ print "Done"
 #     print d
 # print "Done"
 
-dir_path = 'C:/Users/crlyli0476/Desktop/ungmap/ungmap_reproject/parkingSpot_files'
+dir_path = 'C:/Users/clsmit8703/Desktop/Data/ungmap_reproject/parkingSpot_files'
 files = glob.glob(dir_path + '/*.shp')
 
 for file in files:
