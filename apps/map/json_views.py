@@ -1,4 +1,3 @@
-
 from rest_framework import mixins
 from rest_framework import generics
 from apps.map import models, serializers
@@ -48,6 +47,27 @@ class ParkinglotFilter(django_filters.Filter):
         field = ['id', 'lot_name', 'campus', 'desc']
 
 
+class ParkingSpotsFilter(django_filters.Filter):
+
+    class Meta:
+        model = models.ParkingLots
+        field = ['id', 'spot_type', 'campus']
+
+
+class ParkingLotLinesFilter(django_filters.Filter):
+
+    class Meta:
+        model = models.ParkingLots
+        field = ['id', 'name', 'campus']
+
+
+class CallBoxFilter(django_filters.Filter):
+
+    class Meta:
+        model = models.ParkingLots
+        field = ['id', 'name', 'campus']
+
+
 class CampusCollection(generics.ListAPIView):
     queryset = models.Campus.objects.all()
     serializer_class = serializers.CampusSerializer
@@ -82,3 +102,21 @@ class ParkinglotCollection(generics.ListAPIView):
     queryset = models.ParkingLots.objects.all()
     serializer_class = serializers.ParkinglotSerializer
     filter_class = ParkinglotFilter
+
+
+class ParkingSpotCollection(generics.ListAPIView):
+    queryset = models.ParkingSpots.objects.all()
+    serializer_class = serializers.ParkingSpotSerializer
+    filter_class = ParkingSpotsFilter
+
+
+class ParkingLotLinesCollection(generics.ListAPIView):
+    queryset = models.ParkingLotLines.objects.all()
+    serializer_class = serializers.ParkingLotLinesSerializer
+    filter_class = ParkingLotLinesFilter
+
+
+class CallBoxCollection(generics.ListAPIView):
+    queryset = models.CallBoxes.objects.all()
+    serializer_class = serializers.CallBoxSerializer
+    filter_class = CallBoxFilter
