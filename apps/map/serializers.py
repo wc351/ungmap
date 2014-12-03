@@ -49,3 +49,27 @@ class ParkinglotSerializer(serializers.GeoFeatureModelSerializer):
         model = models.ParkingLots
         geo_field = 'geom'
         field = ('id', 'lot_name', 'campus', 'desc')
+
+
+class ParkingSpotSerializer(serializers.GeoFeatureModelSerializer):
+
+    class Meta:
+        model = models.ParkingSpots
+        geo_field = 'geom'
+        field = ('id', 'name', 'campus')
+
+
+class ParkingLotLinesSerializer(serializers.GeoFeatureModelSerializer):
+
+    class Meta:
+        model = models.ParkingLotLines
+        geo_field = 'geom'
+        field = ('id', 'name', 'campus')
+
+
+class CallBoxSerializer(serializers.GeoFeatureModelSerializer):
+
+    class Meta:
+        model = models.CallBoxes
+        geo_field = 'geom'
+        field = ('id', 'name', 'campus')
