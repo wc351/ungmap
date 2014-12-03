@@ -5,7 +5,8 @@ import django
 django.setup()
 
 
-path1='C:/Users/crlyli0476/Desktop/ungmap/ungmap_reproject/Gainesville_Parkinglots_disolv.shp'
+path1='C:/Users/clsmit8703/Desktop/Data/Gainesville_Parkinglots_disolv.shp'
+
 
 
 sf1 = shapefile.Reader(path1)

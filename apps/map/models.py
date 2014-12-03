@@ -7,6 +7,7 @@ class Campus(models.Model):
     name = models.CharField(max_length=50)
     location = models.CharField(max_length=50)
     geom = models.PointField()
+    box = models.PolygonField(default=None, null=True, blank=True)
     objects = models.GeoManager()
 
     class Meta:
@@ -17,7 +18,7 @@ class Campus(models.Model):
         return reverse_lazy('map:campus_dview', kwargs={'pk': self.pk})
 
     def __str__(self):
-        return self.name
+        return "{}-{}".format(self.pk, self.name)
 
 
 class Building(models.Model):
@@ -139,6 +140,44 @@ class ParkingLots(models.Model):
 
     def __str__(self):
         return "{0}, {1} Campus".format(self.lot_name, self.campus.name)
+
+
+class ParkingSpots(models.Model):
+    """Parking spot model
+    """
+    spot_type = models.CharField(max_length=50)
+    campus = models.ForeignKey(Campus)
+    geom = models.GeometryField()
+    objects = models.GeoManager()
+
+    class Meta:
+        verbose_name = 'Parking Spots'
+
+    def __str__(self):
+        return "{0}, {1} Campus".format(self.spot_type, self.campus.name)
+
+
+class ParkingLotLines(models.Model):
+    """Parking lot line model
+    """
+    name = models.CharField(max_length=50)
+    campus = models.ForeignKey(Campus)
+    geom = models.LineStringField()
+    objects = models.GeoManager()
+
+    class Meta:
+        verbose_name = 'Parking Lot Lines'
+
+    def __str__(self):
+        return "{0}, {1} Campus".format(self.name, self.campus.name)
+
+
+class CallBoxes(models.Model):
+    """Call Box Model"""
+    name = models.CharField(max_length=50)
+    campus = models.ForeignKey(Campus)
+    geom = models.PointField()
+    objects = models.GeoManager()
 
 
 class CampusPics(models.Model):

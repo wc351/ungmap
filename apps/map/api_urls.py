@@ -9,5 +9,8 @@ urlpatterns = patterns('',
                        url(r'^recreation', json_views.RecreationCollection.as_view(), name='recreation'),
                        url(r'^classrooms', json_views.ClassroomCollection.as_view(), name='classrooms'),
                        url(r'^parkinglots', json_views.ParkinglotCollection.as_view(), name='parkinglots'),
+                       url(r'^parkingspots', json_views.ParkingSpotCollection.as_view(), name='parkingspots'),
+                       url(r'^parkinglines', json_views.ParkingLotLinesCollection.as_view(), name='parkinglines'),
+                       url(r'^callboxes', json_views.CallBoxCollection.as_view(), name='callboxes'),
 
                        )
