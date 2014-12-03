@@ -5,7 +5,7 @@ import django
 django.setup()
 
 
-path1='C:/Users/wecox1088/Desktop/UNGMap_Data/Gainesville_Parkinglots_disolv.shp'
+path1='C:/Users/clsmit8703/Desktop/Data/Gainesville_Parkinglots_disolv.shp'
 
 
 

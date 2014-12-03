@@ -4,7 +4,7 @@ import django
 django.setup()
 
 
-faculty_path = 'C:/Users/wecox1088/Desktop/UNGMap_Data/Faculty/All_Faculty.csv'
+faculty_path = 'C:/Users/clsmit8703/Desktop/Data//Faculty/All_Faculty.csv'
 f = open(faculty_path, 'r')
 reader = csv.reader(f, delimiter=',', quotechar='"')
 data = [line for line in reader]
