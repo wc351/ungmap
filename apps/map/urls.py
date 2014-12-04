@@ -17,5 +17,8 @@ urlpatterns = patterns('',
     url(r'^person(?P<pk>\d+)/$', views.FacultyDetailView.as_view(), name='faculty_dview'),
     url(r'^aboutus$', views.AboutusView.as_view(), name= 'aboutus'),
     url(r'^directories$', views.DirectoriesView.as_view(), name='directories'),
+    url(r'^individualfacultymap/(?P<pk>\d+)/$', views.IndividualFacultyMapView.as_view(), name='ifacultymap'),
+    url(r'^individualbuildingmap/(?P<pk>\d+)/$', views.IndividualBuildingMapView.as_view(), name='ibuildingmap'),
+    url(r'^individualparkinglotmap/(?P<pk>\d+)/$', views.IndividualParkinglotMapView.as_view(), name='iparkinglotmap'),
 #    url(r'search$', name=basic_search(template='search.html')),
 )

@@ -6,7 +6,6 @@ class Campus(models.Model):
     """ Campus model."""
     name = models.CharField(max_length=50)
     location = models.CharField(max_length=50)
-    geom = models.PointField()
     box = models.PolygonField(default=None, null=True, blank=True)
     objects = models.GeoManager()
 
