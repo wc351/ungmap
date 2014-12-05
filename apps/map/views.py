@@ -1,5 +1,6 @@
 from django.views import generic
 from apps.map import models
+from django.db.models import Q
 
 
 class MainView(generic.TemplateView):
@@ -38,6 +39,16 @@ class BuildingDetailView(generic.DetailView):
     context_object_name = 'building'
 
 
+class IndividualBuildingMapView(generic.TemplateView):
+    template_name = 'map/individual_building_map.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(IndividualBuildingMapView, self).get_context_data(**kwargs)
+        building = models.Building.objects.filter(pk=kwargs['pk']).first()
+        context['building'] = building
+        return context
+
+
 class ParkingLotListView(generic.TemplateView):
     template_name = "map/parkinglots_list.html"
 
@@ -54,6 +65,16 @@ class ParkingLotDetailView(generic.DetailView):
     context_object_name = 'parkinglot'
 
 
+class IndividualParkinglotMapView(generic.TemplateView):
+    template_name = 'map/individual_parkinglot_map.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(IndividualParkinglotMapView, self).get_context_data(**kwargs)
+        parkinglot = models.ParkingLots.objects.filter(pk=kwargs['pk']).first()
+        context['parkinglot'] = parkinglot
+        return context
+
+
 class FacultyListView(generic.TemplateView):
     template_name = "map/faculty_list.html"
 
@@ -68,6 +89,16 @@ class FacultyDetailView(generic.DetailView):
     model = models.Faculty
     template_name = "map/faculty_detail.html"
     context_object_name = 'faculty'
+
+
+class IndividualFacultyMapView(generic.TemplateView):
+    template_name = 'map/individual_teacher_map.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(IndividualFacultyMapView, self).get_context_data(**kwargs)
+        faculty = models.Faculty.objects.filter(pk=kwargs['pk']).first()
+        context['faculty'] = faculty
+        return context
 
 
 class AboutusView(generic.TemplateView):

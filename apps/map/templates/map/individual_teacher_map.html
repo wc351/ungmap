@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block moreheader %}
+<script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.3/mapbox.js'></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.3/mapbox.css' rel="stylesheet"/>
+<style> #map {position:absolute; top:50px; right:10px;left:6px;bottom:0;width:100%;
+    height:1000px;}</style>
+{% endblock %}
+
+{% block content %}
+<div id="map"></div>
+{% endblock %}
+
+{% block scriptspace %}
+    <script>
+    var map= L.mapbox.map('map','wc351.k6p7ha1o');
+     map.fitBounds([[{{ faculty.campus.box.extent.3 }}, {{ faculty.campus.box.extent.0 }}],
+                  [{{ faculty.campus.box.extent.1 }}, {{ faculty.campus.box.extent.2 }}]]);
+    map.setMaxBounds([[{{ faculty.campus.box.extent.3 }}, {{ faculty.campus.box.extent.0 }}],
+                  [{{ faculty.campus.box.extent.1 }}, {{ faculty.campus.box.extent.2 }}]]);
+
+    var g_buildings = {
+        fillColor: '#E31A1C',
+        color: '#E31A1C',
+        weight: 1,
+        opacity: 1,
+        fillOpacity: 0.8
+    };
+
+     $.getJSON("{% url 'ungmap_api:buildings' %}?id={{ faculty.building.pk }}", function (data) {
+          L.geoJson(data, {pointToLayer: function (feature, latlng) {
+              return L.polygon(latlng, g_buildings)
+          },
+              style: g_buildings,
+              onEachFeature: function (feature, layer) {
+                  (function (layer, properties) {
+                      layer.on("click", function (e) {
+                          var popup = L.popup().setLatLng(e.latlng)
+                                  .setContent('<a href="/popular_places/' + feature.id + '">' + properties.name + '</a>')
+                                  .openOn(map);
+                      });
+                  })(layer, feature.properties);
+              }
+          }).addTo(map);
+      });
+    </script>
+{% endblock %}

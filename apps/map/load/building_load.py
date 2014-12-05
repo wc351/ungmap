@@ -20,9 +20,9 @@ sf4 = shapefile.Reader(path4)
 sr4 = sf4.shapeRecords()
 
 Gainesville_cam = Campus.objects.filter(pk=1).first()
-Oconee_cam = Campus.objects.filter(pk=2).first()
+Oconee_cam = Campus.objects.filter(pk=4).first()
 Dahlonega_cam = Campus.objects.filter(pk=3).first()
-Cumming_cam = Campus.objects.filter(pk=4).first()
+Cumming_cam = Campus.objects.filter(pk=2).first()
 
 for r in sr1:
     geom = r.shape.__geo_interface__

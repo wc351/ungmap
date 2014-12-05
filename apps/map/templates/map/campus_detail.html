@@ -24,9 +24,10 @@
                 <b>{{ campus.location }}</b>
         </div>
     </div>
-    <a href="{% url 'map:building_lview' campus.pk %}">View Buildings</a><br>
-    <a href="{% url 'map:parkinglot_lview' campus.pk %}">View Parking Lots</a><br>
-    <a href="{% url 'map:faculty_lview' campus.pk %}">View Faculty Members</a>
+    <p>Click on a link below to view: </p>
+    <a href="{% url 'map:building_lview' campus.pk %}">Buildings on {{ campus.name }} Campus</a><br>
+    <a href="{% url 'map:parkinglot_lview' campus.pk %}">Parking Lots on {{ campus.name }} Campus</a><br>
+    <a href="{% url 'map:faculty_lview' campus.pk %}">Faculty Members on {{ campus.name }} Campus</a>
     <br>
     <div class="row clearfix">
     <div class= "col-md-12 column">
@@ -106,21 +107,33 @@ map.on('locationerror', function() {
     map.setMaxBounds([[{{ campus.box.extent.3 }}, {{ campus.box.extent.0 }}],
                   [{{ campus.box.extent.1 }}, {{ campus.box.extent.2 }}]]);
     var g_parkinglots = {
-        fillColor: "#ff7800",
-        color: "#000",
-        weight: 1,
-        opacity: 0.08,
-        fillOpacity: 0.08
-    };
-    var g_buildings = {
-        fillColor: '#E31A1C',
-        color: '#E31A1C',
+        fillColor: "",
+        color: "#1C1C1C",
         weight: 1,
         opacity: 1,
         fillOpacity: 0.8
     };
+    var g_buildings = {
+        fillColor: '#8A0808',
+        color: '#8A0808',
+        weight: 1,
+        opacity: 1,
+        fillOpacity: 0.8
+    };
+    var g_parkinglines = {
+        color: '#FFFFFF',
+        weight: 1,
+        opacity: 1
+    };
+    var g_callboxes = {
+        radius: 8,
+        color: "#0404B4",
+        weight: 1,
+        opacity:.5,
+        fillOpacity:1
+    };
 
-      $.getJSON( '/api/v1/parkinglots', function (data) {
+      $.getJSON("{% url 'ungmap_api:parkinglots' %}", function (data) {
           L.geoJson(data, {pointToLayer: function (feature, latlng) {
               return L.polygon(latlng, g_parkinglots)
           },
@@ -129,14 +142,14 @@ map.on('locationerror', function() {
                   (function (layer, properties) {
                       layer.on("click", function (e) {
                           var popup = L.popup().setLatLng(e.latlng)
-                                  .setContent('<a href="/popular_places/' + feature.id + '">' + properties.name + '</a>')
+                                  .setContent(properties.lot_name)
                                   .openOn(map);
                       });
                   })(layer, feature.properties);
               }
           }).addTo(map);
       });
-     $.getJSON( '/api/v1/buildings', function (data) {
+     $.getJSON("{% url 'ungmap_api:buildings' %}", function (data) {
           L.geoJson(data, {pointToLayer: function (feature, latlng) {
               return L.polygon(latlng, g_buildings)
           },
@@ -145,8 +158,34 @@ map.on('locationerror', function() {
                   (function (layer, properties) {
                       layer.on("click", function (e) {
                           var popup = L.popup().setLatLng(e.latlng)
-                                  .setContent('<a href="/popular_places/' + feature.id + '">' + properties.name + '</a>')
+                                  .setContent(properties.name)
                                   .openOn(map);
+                      });
+                  })(layer, feature.properties);
+              }
+          }).addTo(map);
+      });
+          $.getJSON("{% url 'ungmap_api:parkinglines' %}", function (data) {
+          L.geoJson(data, {pointToLayer: function (feature, latlng) {
+              return L.linestring(latlng, g_parkinglines)
+          },
+              style: g_parkinglots,
+              onEachFeature: function (feature, layer) {
+                  (function (layer, properties) {
+                      layer.on("click", function (e) {
+                      });
+                  })(layer, feature.properties);
+              }
+          }).addTo(map);
+      });
+              $.getJSON("{% url 'ungmap_api:callboxes' %}", function (data) {
+          L.geoJson(data, {pointToLayer: function (feature, latlng) {
+              return L.circleMarker(latlng, g_callboxes)
+          },
+              style: g_callboxes,
+              onEachFeature: function (feature, layer) {
+                  (function (layer, properties) {
+                      layer.on("click", function (e) {
                       });
                   })(layer, feature.properties);
               }
