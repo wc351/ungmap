@@ -39,7 +39,7 @@ for r in sr3:
     d.save()
 print "Done"
 
-path4='C:/Users/crlyli0476/Desktop/ungmap/ungmap_reproject/callboxes.shp'
+path4='C:/Users/clsmit8703/Desktop/Data/ungmap_reproject/callboxes.shp'
 sf4 = shapefile.Reader(path4)
 sr4 = sf4.shapeRecords()
 for r in sr4:
