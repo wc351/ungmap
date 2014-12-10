@@ -39,16 +39,15 @@ for r in sr3:
     d.save()
 print "Done"
 
-# path4='C:/Users/crlyli0476/Desktop/ungmap/ungmap_reproject/callboxes.shp'
-# sf4 = shapefile.Reader(path4)
-# sr4 = sf4.shapeRecords()
-#
-# for r in sr1:
-#     d = CallBoxes(name=r.record[1], campus=Gainesville_cam, point="POINT({} {})".format(r.shape.points[0][0],
-#                                                                                         r.shape.points[0][1]))
-# #    d.save()
-#     print d
-# print "Done"
+path4='C:/Users/clsmit8703/Desktop/Data/ungmap_reproject/callboxes.shp'
+sf4 = shapefile.Reader(path4)
+sr4 = sf4.shapeRecords()
+for r in sr4:
+    d = CallBoxes(name=r.record[1], campus=Gainesville_cam, geom="POINT({} {})".format(r.shape.points[0][0],
+                                                                                      r.shape.points[0][1]))
+
+    d.save()
+print "Done"
 
 dir_path = 'C:/Users/clsmit8703/Desktop/Data/ungmap_reproject/parkingSpot_files'
 files = glob.glob(dir_path + '/*.shp')

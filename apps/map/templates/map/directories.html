@@ -8,5 +8,7 @@
 <h1>
     List all of the directories here!
 </h1>
-
+{% for campus in campuses %}
+    <a href="{% url "map:campus_dview" pk=campus.pk %}">{{ campus.name }}</a><br>
+    {% endfor %}
 {% endblock %}

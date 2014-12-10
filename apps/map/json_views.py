@@ -4,68 +4,85 @@ from apps.map import models, serializers
 import django_filters
 
 
-class CampusFilter(django_filters.Filter):
+class IntegerListFilter(django_filters.Filter):
+    def filter(self, qs, value):
+        if value not in (None, ''):
+            integers = [int(v) for v in value.split(',')]
+            return qs.filter(**{'{}__{}'.format(self.name, self.lookup_type):integers})
+        return qs
+
+
+class CampusFilter(django_filters.FilterSet):
+    id = IntegerListFilter(name='id', lookup_type='in')
 
     class Meta:
         model = models.Campus
         fields = ['id', 'name', 'location']
 
 
-class BuildingFilter(django_filters.Filter):
+class BuildingFilter(django_filters.FilterSet):
+    id = IntegerListFilter(name='id', lookup_type='in')
 
     class Meta:
         model = models.Building
-        field = ['id', 'name', 'desc', 'build_num']
+        fields = ['id', 'name', 'alter_name', 'desc', 'build_num']
 
 
-class FacultyFilter(django_filters.Filter):
+class FacultyFilter(django_filters.FilterSet):
+    id = IntegerListFilter(name='id', lookup_type='in')
+    campus = IntegerListFilter(name='campus', lookup_type='in')
 
     class Meta:
         model = models.Faculty
-        field = ['id', 'name', 'title', 'campus', 'building', 'office_num', 'phone_num', 'email', 'primary_campus',
-                 'department']
+        fields = ['id', 'name', 'title', 'campus', 'building', 'office_num', 'phone_num', 'email', 'department']
 
 
-class RecreationFilter(django_filters.Filter):
+class RecreationFilter(django_filters.FilterSet):
+    id = IntegerListFilter(name='id', lookup_type='in')
 
     class Meta:
         model = models.Recreation
-        field = ['id', 'name', 'campus']
+        fields = ['id', 'name', 'campus']
 
 
-class ClassroomFilter(django_filters.Filter):
+class ClassroomFilter(django_filters.FilterSet):
+    id = IntegerListFilter(name='id', lookup_type='in')
 
     class Meta:
         model = models.Classrooms
-        field = ['id', 'name', 'campus', 'num', 'building']
+        fields = ['id', 'name', 'campus', 'num', 'building']
 
 
-class ParkinglotFilter(django_filters.Filter):
-
-    class Meta:
-        model = models.ParkingLots
-        field = ['id', 'lot_name', 'campus', 'desc']
-
-
-class ParkingSpotsFilter(django_filters.Filter):
+class ParkinglotFilter(django_filters.FilterSet):
+    id = IntegerListFilter(name='id', lookup_type='in')
 
     class Meta:
         model = models.ParkingLots
-        field = ['id', 'spot_type', 'campus']
+        fields = ['id', 'lot_name', 'campus', 'desc']
 
 
-class ParkingLotLinesFilter(django_filters.Filter):
-
-    class Meta:
-        model = models.ParkingLots
-        field = ['id', 'name', 'campus']
-
-
-class CallBoxFilter(django_filters.Filter):
+class ParkingSpotsFilter(django_filters.FilterSet):
+    id = IntegerListFilter(name='id', lookup_type='in')
 
     class Meta:
-        model = models.ParkingLots
-        field = ['id', 'name', 'campus']
+        model = models.ParkingSpots
+        fields = ['id', 'spot_type', 'campus']
+
+
+class ParkingLotLinesFilter(django_filters.FilterSet):
+    id = IntegerListFilter(name='id', lookup_type='in')
+
+    class Meta:
+        model = models.ParkingLotLines
+        fields = ['id', 'name', 'campus']
+
+
+class CallBoxFilter(django_filters.FilterSet):
+    id = IntegerListFilter(name='id', lookup_type='in')
+
+    class Meta:
+        model = models.CallBoxes
+        fields = ['id', 'name', 'campus']
 
 
 class CampusCollection(generics.ListAPIView):

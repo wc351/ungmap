@@ -8,5 +8,7 @@
         <b>Phone Number:</b> {{ faculty.phone_num }}<br>
         <b>Office Building:</b> {{ faculty.building }}<br>
         <b>Office Number:</b> {{ faculty.office_num }}</p>
-
+        <p align="center" style="font-size:18px">
+            <a href="{% url 'map:ifacultymap' pk=faculty.pk %}">Click to View {{ faculty.name }}'s Office Building on Map</a>
+        </p>
 {% endblock %}

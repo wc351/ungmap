@@ -1,11 +1,18 @@
 {% extends 'base.html' %}
 
 {% block moreheader %}
-<script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.3/mapbox.js'></script>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-<link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.3/mapbox.css' rel="stylesheet"/>
-<style> #map {position:absolute; top:50px; right:10px;left:6px;bottom:0;width:100%;
-    height:1000px;}</style>
+    <script src='https://api.tiles.mapbox.com/mapbox.js/v1.6.3/mapbox.js'></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <link href='https://api.tiles.mapbox.com/mapbox.js/v1.6.3/mapbox.css' rel="stylesheet"/>
+    <style> #map {
+        position: absolute;
+        top: 50px;
+        right: 10px;
+        left: 6px;
+        bottom: 0;
+        width: 100%;
+        height: 1000px;
+    }</style>
 {% endblock %}
 
 <a href='#' id='geolocate' class='ui-button'>Find me</a>
@@ -24,133 +31,217 @@
                 <b>{{ campus.location }}</b>
         </div>
     </div>
-    <a href="{% url 'map:building_lview' campus.pk %}">View Buildings</a><br>
-    <a href="{% url 'map:parkinglot_lview' campus.pk %}">View Parking Lots</a><br>
-    <a href="{% url 'map:faculty_lview' campus.pk %}">View Faculty Members</a>
+    <div>
+        <p>Click on a link below to view: </p>
+        <a href="{% url 'map:building_lview' campus.pk %}">Buildings on {{ campus.name }} Campus</a><br>
+        <a href="{% url 'map:parkinglot_lview' campus.pk %}">Parking Lots on {{ campus.name }} Campus</a><br>
+        <a href="{% url 'map:faculty_lview' campus.pk %}">Faculty Members on {{ campus.name }} Campus</a>
+    </div>
     <br>
-    <div class="row clearfix">
-    <div class= "col-md-12 column">
-    <div id="map"></div>
-        <a href='#' id='geolocate' class='ui-button'>Find me</a>
-        <style>
-        .ui-button {
-  background:#3887BE;
-  color:#FFF;
-  display:block;
-  position:absolute;
-  top:50%;left:50%;
-  width:160px;
-  margin:-20px 0 0 -80px;
-  z-index:100;
-  text-align:center;
-  padding:10px;
-  border:1px solid rgba(0,0,0,0.4);
-  border-radius:3px;
-  }
-  .ui-button:hover {
-    background:#3074a4;
-    color:#fff;
-    }
-    </style>
-    </div>
-    </div>
 
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div id="map"></div>
+            <a href='#' id='geolocate' class='ui-button'>Find me</a>
+            <style>
+                .ui-button {
+                    background: #3887BE;
+                    color: #FFF;
+                    display: block;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    width: 160px;
+                    margin: -20px 0 0 -80px;
+                    z-index: 100;
+                    text-align: center;
+                    padding: 10px;
+                    border: 1px solid rgba(0, 0, 0, 0.4);
+                    border-radius: 3px;
+                }
+
+                .ui-button:hover {
+                    background: #3074a4;
+                    color: #fff;
+                }
+            </style>
+        </div>
+    </div>
 {% endblock %}
 
 
 {% block scriptspace %}
-    <script>
-    L.mapbox.accessToken = 'pk.eyJ1IjoiY2xzbWl0ODcwMyIsImEiOiJGcEo5d1U4In0.lyzUE4Dmep0FyyDntU04Kg';
-    var geolocate = document.getElementById('geolocate');
-    var map= L.mapbox.map('map','wc351.k6p7ha1o');
-    var myLayer = L.mapbox.featureLayer().addTo(map);
-    if (!navigator.geolocation) {
-    geolocate.innerHTML = 'Geolocation is not available';
-} else {
-    geolocate.onclick = function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-        map.locate();
-    };
+    <body>
+<style>
+
+.legend span {
+  display:block;
+  float:left;
+  height:14px;
+  width:15%;
+  text-align:center;
+  font-size:15px;
+  color:#808080;
+  }
+
+.legend label {
+  width:150px;
 }
 
-// Once we've got a position, zoom and center the map
-// on it, and add a single marker.
-map.on('locationfound', function(e) {
-    map.fitBounds(e.bounds);
+.legend {
+    width:200px;
+}
+</style>
 
-    myLayer.setGeoJSON({
-        type: 'Feature',
-        geometry: {
-            type: 'Point',
-            coordinates: [e.latlng.lng, e.latlng.lat]
-        },
-        properties: {
-            'title': 'Here I am!',
-            'marker-color': '#ff8888',
-            'marker-symbol': 'star'
+<!-- Set the display of this container to none so we can
+     add it programmatically to `legendControl` -->
+<div id='legend' style='display:none;'>
+  <nav class='legend clearfix'>
+    <span style='background:#1C1C1C;'></span><label> Parking Lots</label><br>
+    <span style='background:#8A0808;'></span><label> Buildings</label><br>
+    <span style='background:#0404B4;'></span><label> Emergency Call Post</label>
+</div>
+
+    <script>
+        L.mapbox.accessToken = 'pk.eyJ1IjoiY2xzbWl0ODcwMyIsImEiOiJGcEo5d1U4In0.lyzUE4Dmep0FyyDntU04Kg';
+        var geolocate = document.getElementById('geolocate');
+        var map = L.mapbox.map('map', 'wc351.k6p7ha1o', {
+            legendControl:{
+                position:'topright'
+            }
+        });
+        map.legendControl.addLegend(document.getElementById('legend').innerHTML);
+        var myLayer = L.mapbox.featureLayer().addTo(map);
+        if (!navigator.geolocation) {
+            geolocate.innerHTML = 'Geolocation is not available';
+        } else {
+            geolocate.onclick = function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                map.locate();
+            };
         }
-    });
 
-    // And hide the geolocation button
-    geolocate.parentNode.removeChild(geolocate);
-});
+        // Once we've got a position, zoom and center the map
+        // on it, and add a single marker.
+        map.on('locationfound', function (e) {
+            map.fitBounds(e.bounds);
 
-// If the user chooses not to allow their location
-// to be shared, display an error message.
-map.on('locationerror', function() {
-    geolocate.innerHTML = 'Position could not be found';
-});
-     map.fitBounds([[{{ campus.box.extent.3 }}, {{ campus.box.extent.0 }}],
-                  [{{ campus.box.extent.1 }}, {{ campus.box.extent.2 }}]]);
-    map.setMaxBounds([[{{ campus.box.extent.3 }}, {{ campus.box.extent.0 }}],
-                  [{{ campus.box.extent.1 }}, {{ campus.box.extent.2 }}]]);
-    var g_parkinglots = {
-        fillColor: "#ff7800",
-        color: "#000",
-        weight: 1,
-        opacity: 0.08,
-        fillOpacity: 0.08
-    };
-    var g_buildings = {
-        fillColor: '#E31A1C',
-        color: '#E31A1C',
-        weight: 1,
-        opacity: 1,
-        fillOpacity: 0.8
-    };
+            myLayer.setGeoJSON({
+                type: 'Feature',
+                geometry: {
+                    type: 'Point',
+                    coordinates: [e.latlng.lng, e.latlng.lat]
+                },
+                properties: {
+                    'title': 'Here I am!',
+                    'marker-color': '#ff8888',
+                    'marker-symbol': 'star'
+                }
+            });
 
-      $.getJSON( '/api/v1/parkinglots', function (data) {
-          L.geoJson(data, {pointToLayer: function (feature, latlng) {
-              return L.polygon(latlng, g_parkinglots)
-          },
-              style: g_parkinglots,
-              onEachFeature: function (feature, layer) {
-                  (function (layer, properties) {
-                      layer.on("click", function (e) {
-                          var popup = L.popup().setLatLng(e.latlng)
-                                  .setContent('<a href="/popular_places/' + feature.id + '">' + properties.name + '</a>')
-                                  .openOn(map);
-                      });
-                  })(layer, feature.properties);
-              }
-          }).addTo(map);
-      });
-     $.getJSON( '/api/v1/buildings', function (data) {
-          L.geoJson(data, {pointToLayer: function (feature, latlng) {
-              return L.polygon(latlng, g_buildings)
-          },
-              style: g_buildings,
-              onEachFeature: function (feature, layer) {
-                  (function (layer, properties) {
-                      layer.on("click", function (e) {
-                          var popup = L.popup().setLatLng(e.latlng)
-                                  .setContent('<a href="/popular_places/' + feature.id + '">' + properties.name + '</a>')
-                                  .openOn(map);
-                      });
-                  })(layer, feature.properties);
-              }
-          }).addTo(map);
-      });
+            // And hide the geolocation button
+            geolocate.parentNode.removeChild(geolocate);
+        });
+
+        // If the user chooses not to allow their location
+        // to be shared, display an error message.
+        map.on('locationerror', function () {
+            geolocate.innerHTML = 'Position could not be found';
+        });
+        map.fitBounds([
+            [{{ campus.box.extent.3 }}, {{ campus.box.extent.0 }}],
+            [{{ campus.box.extent.1 }}, {{ campus.box.extent.2 }}]
+        ]);
+        map.setMaxBounds([
+            [{{ campus.box.extent.3 }}, {{ campus.box.extent.0 }}],
+            [{{ campus.box.extent.1 }}, {{ campus.box.extent.2 }}]
+        ]);
+        var g_parkinglots = {
+            fillColor: "",
+            color: "#1C1C1C",
+            weight: 1,
+            opacity: 1,
+            fillOpacity: 0.8
+        };
+        var g_buildings = {
+            fillColor: '#8A0808',
+            color: '#8A0808',
+            weight: 1,
+            opacity: 1,
+            fillOpacity: 0.8
+        };
+        var g_parkinglines = {
+            color: '#FFFFFF',
+            weight: 1,
+            opacity: 1
+        };
+        var g_callboxes = {
+            radius: 8,
+            color: "#0404B4",
+            weight: 1,
+            opacity: .5,
+            fillOpacity: 1
+        };
+
+        $.getJSON("{% url 'ungmap_api:parkinglots' %}", function (data) {
+            L.geoJson(data, {pointToLayer: function (feature, latlng) {
+                return L.polygon(latlng, g_parkinglots)
+            },
+                style: g_parkinglots,
+                onEachFeature: function (feature, layer) {
+                    (function (layer, properties) {
+                        layer.on("click", function (e) {
+                            var popup = L.popup().setLatLng(e.latlng)
+                                    .setContent(properties.lot_name)
+                                    .openOn(map);
+                        });
+                    })(layer, feature.properties);
+                }
+            }).addTo(map);
+        });
+        $.getJSON("{% url 'ungmap_api:buildings' %}", function (data) {
+            L.geoJson(data, {pointToLayer: function (feature, latlng) {
+                return L.polygon(latlng, g_buildings)
+            },
+                style: g_buildings,
+                onEachFeature: function (feature, layer) {
+                    (function (layer, properties) {
+                        layer.on("click", function (e) {
+                            var popup = L.popup().setLatLng(e.latlng)
+                                    .setContent(properties.name)
+                                    .openOn(map);
+                        });
+                    })(layer, feature.properties);
+                }
+            }).addTo(map);
+        });
+        $.getJSON("{% url 'ungmap_api:parkinglines' %}", function (data) {
+            L.geoJson(data, {pointToLayer: function (feature, latlng) {
+                return L.linestring(latlng, g_parkinglines)
+            },
+                style: g_parkinglots,
+                onEachFeature: function (feature, layer) {
+                    (function (layer, properties) {
+                        layer.on("click", function (e) {
+                        });
+                    })(layer, feature.properties);
+                }
+            }).addTo(map);
+        });
+        $.getJSON("{% url 'ungmap_api:callboxes' %}", function (data) {
+            L.geoJson(data, {pointToLayer: function (feature, latlng) {
+                return L.circleMarker(latlng, g_callboxes)
+            },
+                style: g_callboxes,
+                onEachFeature: function (feature, layer) {
+                    (function (layer, properties) {
+                        layer.on("click", function (e) {
+                        });
+                    })(layer, feature.properties);
+                }
+            }).addTo(map);
+        });
     </script>
+    </body>
 {% endblock %}
